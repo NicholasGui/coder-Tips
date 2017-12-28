@@ -5,7 +5,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #建立一个序列
-pd.Series([1,3,5,np.nan,6,8])
+series=pd.Series([1,3,5,np.nan,6,8])
+#序列的提取
+series[1] #取series索引为1的值
+series.iloc[1] #取series第2行的值
+
 #建立数据框
 dates=pd.date_range('20130101',periods=6)
 df=pd.DataFrame(np.random.randn(6,4),index=dates,columns=list("ABCD"))
@@ -203,3 +207,17 @@ frame.sub(series3,axis=0)
 
 #以列联表的形式显示数据 margin表示是否求和
 aa=pd.crosstab(df['rs2273298'],df["y"],margins=True)
+
+#copy
+b=a["A"]
+c=a["B"]
+如果不加copy，b和c仅仅是对象a不同部分的索引，本质上仍是a,改变a、b会影响到a
+b=a["A"].copy()
+c=a["B"].copy()
+加了copy之后，则b、c净与a没有关系
+
+##例子
+x = pd.DataFrame({"A": [1., 2., 3.],"B":[2,1,2]})
+y1 = x['A']
+y2 = x['A'].copy()
+x.loc[x['A']>1, "A"]=99 #在原数据集中将变量A大于1的值设为99 必须使用loc不能直接引用 会影响到y1 但不影响y2
