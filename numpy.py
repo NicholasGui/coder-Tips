@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-测试下
 import numpy as np
 import pandas as pd
 arr1=np.arange(10)
