@@ -50,3 +50,11 @@ print(cc)
 
 #Out[102]: 'I belive glc is a better man'
 
+# 格式化字符串
+# 生成20个字符串 形如group1-group20
+['group{}'.format(i) for i in range(1,21)]
+
+# 生成20个字符串 形如group001-group020
+['group{:0>3}'.format(i) for i in range(1,21)]
+
+# m>n n表示位数 m表示要补的数字 >表示向左补 <表示向右补
