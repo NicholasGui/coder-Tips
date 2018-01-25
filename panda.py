@@ -221,3 +221,32 @@ x = pd.DataFrame({"A": [1., 2., 3.],"B":[2,1,2]})
 y1 = x['A']
 y2 = x['A'].copy()
 x.loc[x['A']>1, "A"]=99 #在原数据集中将变量A大于1的值设为99 必须使用loc不能直接引用 会影响到y1 但不影响y2
+
+
+
+# 读取excle文件
+def load_excel_data(filename):
+      """
+      从excel文件中读取各个sheet 存储在字典df_all当中
+      """
+      data = pd.ExcelFile(filename)
+      print(data.sheet_names)
+      df_all = {}
+      for sheet in data.sheet_names:
+        df_all[sheet] = data.parse(sheet)
+      return df_all
+
+
+#  基于pandas中的列中的值从DataFrame中选择行
+
+# 要选择列值等于标量some​​_value的行，请使用==： 
+df.loc[df['column_name'] == some_value]
+
+# 要选择其列值在可迭代值some_values中的行，请使用isin：
+df.loc[df['column_name'].isin(some_values)]
+
+# 要选择列值不等于some_value的行，请使用！=：
+df.loc[df['column_name'] != some_value]
+
+# isin返回一个布尔系列，所以要选择值不在some_values的行，使用〜来否定布尔系列：
+df[~df['column_name'].isin(some_values)] # 注意否定布尔序列是~ 而不是！ 
